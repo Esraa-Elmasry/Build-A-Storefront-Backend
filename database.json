@@ -1,0 +1,16 @@
+{
+    "dev": {
+      "driver": "pg",
+      "host": "127.0.0.1",
+      "database": "books_dev",
+      "user": "postgres",
+     "password": "InspectoR9862"
+    },
+    "test": {
+      "driver": "pg",
+      "host": "127.0.0.1",
+      "database": "books_test",
+      "user": "postgres",
+      "password": "InspectoR9862"
+    }
+  }
