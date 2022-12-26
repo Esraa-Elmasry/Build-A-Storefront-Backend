@@ -3,7 +3,11 @@
 
 ## running project
 - install package npm install
-- by using npm run start
+- npm install dotenv
+- npm install -g db-migrate
+- npm install db-migrate db-migrate-pg
+- db-migrate up
+- using npm run start
 - in watch mode npm run watch 
 
  ## testing project
