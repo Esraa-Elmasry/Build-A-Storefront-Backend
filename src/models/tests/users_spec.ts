@@ -1,5 +1,30 @@
 import { User, UsersStore} from '../users'
 import bcrypt from 'bcrypt'
+import supertest from 'supertest';
+import app from 'express'
+
+const request = supertest(app);
+describe('Test get all users', () => {
+    it('should get all users', () => {
+        request.get('/users').then((response) => { expect(response.status).toBe(200);}) 
+       
+    }
+)});
+
+describe('Test create specific user', () => {
+  it('should create specific user', () => {
+      request.post('/register').then((response) => { expect(response.status).toBe(200);}) 
+     
+  }
+)});
+
+describe('Test show a user', () => {
+  it('should show a user', () => {
+      request.get('/users/:id').then((response) => { expect(response.status).toBe(200);}) 
+     
+  }
+)});
+
 
 const saltRounds=10
 const pepper="$%esra"

@@ -7,12 +7,35 @@ const products_1 = require("../models/products");
 const middleware_1 = __importDefault(require("./middleware"));
 const store = new products_1.ProductsStore();
 const index = async (_req, res) => {
-    const products = await store.index();
-    res.json(products);
+    try {
+        const products = await store.index();
+        res.json(products);
+    }
+    catch (err) {
+        res.status(400);
+        res.json(err);
+    }
+};
+const update = async (req, res) => {
+    try {
+        const product = await store.update(req.body.price, req.params.id);
+        res.json('product updated');
+    }
+    catch (error) {
+        res.status(400);
+        res.json(error);
+        console.log(error);
+    }
 };
 const show = async (req, res) => {
-    const product = await store.show(req.body.id);
-    res.json(product);
+    try {
+        const product = await store.show(req.params.id);
+        res.json(product);
+    }
+    catch (error) {
+        res.status(400);
+        res.json(error);
+    }
 };
 const create = async (req, res) => {
     try {
@@ -31,13 +54,20 @@ const create = async (req, res) => {
     }
 };
 const destroy = async (req, res) => {
-    const deleted = await store.delete(req.body.id);
-    res.json(deleted);
+    try {
+        const deleted = await store.delete(req.body.id);
+        res.json(deleted);
+    }
+    catch (error) {
+        res.status(404);
+        res.json(error);
+    }
 };
 const ProductsRoutes = (app) => {
     app.get('/products', index);
     app.get('/products/:id', show);
     app.post('/createproduct', middleware_1.default, create);
     app.delete('/deleteproduct/:id', destroy);
+    app.patch('/updateproduct/:id', update);
 };
 exports.default = ProductsRoutes;

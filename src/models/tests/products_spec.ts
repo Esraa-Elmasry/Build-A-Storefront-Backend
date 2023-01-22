@@ -1,4 +1,28 @@
 import { Product, ProductsStore} from '../products'
+import supertest from 'supertest';
+import app from 'express'
+
+const request = supertest(app);
+describe('Test get all products', () => {
+    it('should get all products', () => {
+        request.get('/products').then((response) => { expect(response.status).toBe(200);}) 
+       
+    }
+)});
+
+describe('Test create a product', () => {
+  it('should create a specific product', () => {
+      request.post('/createproduct').then((response) => { expect(response.status).toBe(200);}) 
+     
+  }
+)});
+describe('Test show a product', () => {
+  it('should showa product', () => {
+      request.get('/product/:id').then((response) => { expect(response.status).toBe(200);}) 
+     
+  }
+)});
+
 
 const store = new ProductsStore()
 

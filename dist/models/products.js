@@ -18,6 +18,19 @@ class ProductsStore {
             throw new Error(`cannot get product ${err}`);
         }
     }
+    async update(price, id) {
+        try {
+            const sql = 'UPDATE products SET price=($1) WHERE id=($2)';
+            const conn = await database_1.default.connect();
+            const result = await conn.query(sql, [price, parseInt(id)]);
+            console.log(result, 'llll');
+            conn.release();
+            return result.rows[0];
+        }
+        catch (error) {
+            throw new Error(`Could not find product ${id}. Error: ${error}`);
+        }
+    }
     async show(id) {
         try {
             const sql = 'SELECT * FROM products WHERE id=($1)';

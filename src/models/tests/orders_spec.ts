@@ -1,4 +1,38 @@
 import { Order, OrdersStore} from '../orders'
+import supertest from 'supertest';
+import app from 'express'
+
+const request = supertest(app);
+describe('Test get all orders', () => {
+    it('should get all orders', () => {
+        request.get('/orders').then((response) => { expect(response.status).toBe(200);}) 
+       
+    }
+)});
+
+describe('Test create specific order', () => {
+  it('should create a specific order', () => {
+      request.post('/createorder').then((response) => { expect(response.status).toBe(200);}) 
+     
+  }
+)});
+
+describe('Test show an order', () => {
+  it('should show an order', () => {
+      request.get('/orders/:id').then((response) => { expect(response.status).toBe(200);}) 
+     
+  }
+)});
+
+describe('Test add product to current order', () => {
+  it('should add product to current order', () => {
+      request.post('/orders/:orderId/products').then((response) => { expect(response.status).toBe(200);}) 
+     
+  }
+)});
+
+
+
 
 const store = new OrdersStore()
 

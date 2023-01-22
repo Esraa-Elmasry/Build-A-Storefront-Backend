@@ -1,6 +1,32 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const orders_1 = require("../orders");
+const supertest_1 = __importDefault(require("supertest"));
+const express_1 = __importDefault(require("express"));
+const request = (0, supertest_1.default)(express_1.default);
+describe('Test get all orders', () => {
+    it('should get all orders', () => {
+        request.get('/orders').then((response) => { expect(response.status).toBe(200); });
+    });
+});
+describe('Test create specific order', () => {
+    it('should create a specific order', () => {
+        request.post('/createorder').then((response) => { expect(response.status).toBe(200); });
+    });
+});
+describe('Test show an order', () => {
+    it('should show an order', () => {
+        request.get('/orders/:id').then((response) => { expect(response.status).toBe(200); });
+    });
+});
+describe('Test add product to current order', () => {
+    it('should add product to current order', () => {
+        request.post('/orders/:orderId/products').then((response) => { expect(response.status).toBe(200); });
+    });
+});
 const store = new orders_1.OrdersStore();
 describe("Order", () => {
     it('should have an index method', () => {

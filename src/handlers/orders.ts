@@ -6,15 +6,24 @@ import verifyAuthToken from './middleware'
 const store = new OrdersStore()
 
 const index = async (_req:Request, res: Response) =>  {
+try {
     const orders = await store.index()
     res.json(orders)
-}
+} catch(err) {
+  res.status(400)
+  res.json(err)
 
+}
+}
 const show = async (req:Request, res:Response) => {
-    const order = await store.show(req.body.id)
+  try {
+    const order = await store.show(req.params.id)
     res.json(order)
+}catch(err) {
+  res.status(400)
+  res.json(err)
 }
-
+}
 const create = async (req:Request, res:Response) => {
     try {
         const order: Order = {
@@ -44,10 +53,10 @@ console.log(_req)
 
 
 const OrdersRoutes = (app: express.Application) => {
-    app.get('/orders', index)
-    app.get('/orders/:id', show)
+    app.get('/orders', verifyAuthToken, index)
+    app.get('/orders/:id', verifyAuthToken, show)
     app.post('/createorder', verifyAuthToken, create)
-    app.post('/orders/:orderId/products', addProduct)
+    app.post('/orders/:orderId/products',verifyAuthToken, addProduct)
 }
 
 export default OrdersRoutes;

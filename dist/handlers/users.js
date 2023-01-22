@@ -8,12 +8,24 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const middleware_1 = __importDefault(require("./middleware"));
 const store = new users_1.UsersStore();
 const index = async (_req, res) => {
-    const users = await store.index();
-    res.json(users);
+    try {
+        const users = await store.index();
+        res.json(users);
+    }
+    catch (error) {
+        res.status(400);
+        res.json(error);
+    }
 };
 const show = async (req, res) => {
-    const user = await store.show(req.body.id);
-    res.json(user);
+    try {
+        const user = await store.show(req.params.id);
+        res.json(user);
+    }
+    catch (error) {
+        res.status(400);
+        res.json(error);
+    }
 };
 const create = async (req, res) => {
     try {

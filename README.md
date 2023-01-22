@@ -10,6 +10,9 @@
 - using npm run start
 - in watch mode npm run watch 
 
+## port
+- port number 5432
+
  ## testing project
  - using npm run test
 

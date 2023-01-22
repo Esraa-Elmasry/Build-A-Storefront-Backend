@@ -21,6 +21,22 @@ export class ProductsStore {
 
     }
 }
+
+async update(price: number, id: string) : Promise<Product> {
+  try {
+    const sql = 'UPDATE products SET price=($1) WHERE id=($2)'
+    const conn = await client.connect()
+    const result = await conn.query(sql,[price,parseInt(id)])
+    console.log(result, 'llll')
+    conn.release()
+    return result.rows[0]
+    
+  } catch (error) {
+    throw new Error(`Could not find product ${id}. Error: ${error}`)
+    
+  }
+}
+
  async show(id: string): Promise<Product> {
     try {
     const sql = 'SELECT * FROM products WHERE id=($1)'
