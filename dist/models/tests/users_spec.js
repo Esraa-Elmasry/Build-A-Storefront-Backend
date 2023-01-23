@@ -40,6 +40,7 @@ describe("User", () => {
             username: 'esraaelmasry',
             firstname: 'esraa',
             lastname: 'elmasry',
+            email: "esraa.elmasry25@gmail.com",
             password: '28121994'
         });
         expect(result).toBeDefined();
@@ -49,9 +50,9 @@ describe("User", () => {
         expect(result.length).toBeGreaterThanOrEqual(0);
     });
     it('show method should return the correct user', async () => {
-        const result = await store.show("13");
+        const result = await store.show("1");
         expect(result.email).toEqual('esraa.elmasry25@gmail.com');
-        expect(result.username).toEqual('esraaelmasry3');
+        expect(result.username).toEqual('esraaelmasry');
     });
     it("should have an authenticate method", () => {
         expect(store.authenticate).toBeDefined();

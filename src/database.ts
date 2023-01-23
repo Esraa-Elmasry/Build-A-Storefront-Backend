@@ -1,5 +1,5 @@
-import dotenv from 'dotenv'
-import { Pool } from 'pg'
+import * as dotenv from 'dotenv'
+import { Pool } from 'pg';
 
 dotenv.config()
 
@@ -18,6 +18,7 @@ const {
     database:ENV === 'dev'? POSTGRES_DB:POSTGRES_TEST_DB,
     user: POSTGRES_USER,
     password: POSTGRES_PASSWORD,
+
   })
 
 

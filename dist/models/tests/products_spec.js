@@ -50,9 +50,9 @@ describe("Product", () => {
         expect(result.length).toBeGreaterThanOrEqual(0);
     });
     it('show method should return the correct product', async () => {
-        const result = await store.show("2");
+        const result = await store.show("1");
         expect(result).toEqual({
-            id: 2,
+            id: 1,
             name: 'Geology',
             author: 'esraa',
             price: 50,

@@ -37,7 +37,7 @@ describe('Test add product to current order', () => {
 const store = new OrdersStore()
 
 
-describe("Order", () => {
+describe("order", () => {
     it('should have an index method', () => {
       expect(store.index).toBeDefined();
     });

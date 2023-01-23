@@ -18,7 +18,7 @@ const index = async (_req, res) => {
 };
 const show = async (req, res) => {
     try {
-        const order = await store.show(req.body.id);
+        const order = await store.show(req.params.id);
         res.json(order);
     }
     catch (err) {

@@ -12,7 +12,7 @@ class UsersStore {
     async index() {
         try {
             const conn = await database_1.default.connect();
-            const sql = 'SELECT * FROM users';
+            const sql = "SELECT * FROM users";
             const result = await conn.query(sql);
             conn.release();
             return result.rows;
@@ -23,7 +23,7 @@ class UsersStore {
     }
     async show(id) {
         try {
-            const sql = 'SELECT * FROM users WHERE id=($1)';
+            const sql = "SELECT * FROM users WHERE id=($1)";
             const conn = await database_1.default.connect();
             const result = await conn.query(sql, [id]);
             conn.release();
@@ -35,10 +35,16 @@ class UsersStore {
     }
     async create(u) {
         try {
-            const sql = 'INSERT INTO users (email, username, firstname, lastname, password) VALUES($1, $2, $3, $4, $5) RETURNING *';
+            const sql = "INSERT INTO users (email, username, firstname, lastname, password) VALUES($1, $2, $3, $4, $5) RETURNING *";
             const conn = await database_1.default.connect();
             const hashedPassword = bcrypt_1.default.hashSync(u.password + pepper, saltRounds);
-            const result = await conn.query(sql, [u.email, u.username, u.firstname, u.lastname, hashedPassword]);
+            const result = await conn.query(sql, [
+                u.email,
+                u.username,
+                u.firstname,
+                u.lastname,
+                hashedPassword,
+            ]);
             const user = result.rows[0];
             conn.release();
             return user;
@@ -49,7 +55,7 @@ class UsersStore {
     }
     async authenticate(username, password) {
         const conn = await database_1.default.connect();
-        const sql = 'SELECT password FROM users WHERE username=($1)';
+        const sql = "SELECT password FROM users WHERE username=($1)";
         const result = await conn.query(sql, [username]);
         console.log(password + pepper);
         if (result.rows.length) {
